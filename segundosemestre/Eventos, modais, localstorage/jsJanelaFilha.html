@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Exemplo Janela Filha</title>
+    </head>
+
+    <body>
+        <!--Passamos no href o método javascript responsável por abrir o link na janela pai, no opener-->
+        <p class="titulo">LINKS</p>
+        <p class="subtitulo"><a href="javascript:redireciona('http://www.unibrasil.com.br')">UniBrasil</a></p>
+        <p class="subtitulo"><a href="http://www.ufpr.br">UFPR</a></p> <!--Se deixarmos assim, abre na própria filha, sem ligação à janela pai-->/
+        <p class="subtitulo"><a href="javascript:redireciona('jsJanelaPai.html')">Apresentação</a></p>
+    </body>
+<!--no href precisamos colocar o javascript, o o href espera uma url, e estamos passando uma uma função com o parâmetro url, que está no script-->
+    <script>
+        function redireciona(url){
+            window.opener.location=url; //queremos abrir onde abriu a janela, por isso precisamos da função, chamando opener, o "abridor da janela filha"
+            
+        }
+    </script>
+
+</html>

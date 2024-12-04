@@ -1,0 +1,174 @@
+<html>
+<head>
+    <title>Js Validação</title>
+
+    <style  type="text/css">
+
+        td { color:blue; font-family: verdana ; font-size: 12pt}
+
+    </style>
+
+    
+</head>
+
+<!--  ********** TABELA COM CAMPOS DO FORMULÁRIO ********* -->
+
+<body bgcolor="#FFFFFF">
+
+<p>&nbsp</p><!--caracter de espaço-->
+ 
+<div align="center"> 
+Validando compos de Formulário com Funções Javascript <br>
+</div>
+
+<form onsubmit="return checa_formulario(this)" name="icqlist" action="#" method="post">
+
+    
+<div align="center">
+
+<table border="0" cellspacing="1" cellpading="0">
+         
+
+        <tr>
+            <td > Nick: </td>
+            <td><input type="text" size="20" name="nick"></td>
+        </tr>
+        <tr>
+            <td> E-mail: </td>
+            <td><input type="text" size="20" name="email"></td>
+        </tr>
+        <tr>
+            <td> ICQ:  </td>
+            <td><input type="text" size="20" name="icq"></td>
+        </tr>
+        <tr>
+            <td> Senha:  </td>
+            <td><input type="password" size="20" name="senha"></td>
+        </tr>
+        <tr>
+            <td> Confirmar senha:  </td>
+            <td><input type="password" size="20" name="senha2"></td>
+        </tr>
+        <tr>
+            <td> Idade:  </td>
+            <td><input type="text" size="20" name="idade"></td>
+        </tr>
+        <tr>
+            <td> Sexo:  </td>
+            <td><select name="sexo" size="1">
+                <option selected value="selecione">Selecione</option>
+                <option value="M">Masculino</option>
+                <option value="F">Feminino</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td> Cidade:  </td>
+            <td><input type="text" size="20" name="cidade"></td>
+        </tr>
+        <tr>
+            <td> Home-Page:  </td>
+            <td><input type="text" size="20" name="homepage" value="http://"></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="reset" name="limpa"
+            value="Limpar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+            type="submit" name="cadastro" value="Cadastrar"></td>
+        </tr>
+    </table>
+ </div>  
+</form>
+
+<p align="center"><br> </p>
+
+<script>
+
+    function checa_formulario(icqlist)
+    {
+        if (icqlist.nick.value == "")
+            {
+                alert("Digite o seu Nick!");
+                icqlist.nick.focus();
+                return(false); 
+            }
+        
+        if(icqlist.email.value == "")
+            {
+                alert("O campo e-mail está vazio!");
+                icqlist.email.focus();
+                return(false);
+            }
+        if(icqlist.email.value.indexOf('@', 0) == -1)
+            {
+                alert("O e-mail é inválido!")
+                icqlist.email.focus();
+                return(false);
+            }
+        
+        if(icqlist.icq.value == "")
+            {
+                alert("O campo ICQ está vazio!");
+                icqlist.icq.focus();
+                return(false);
+                
+            }
+        
+        var ver_numero = "1234567890";
+        var icqv = icqlist.icq.value;
+        var invalido = true;
+        
+        for (i = 0; i < icqv.length; i++)
+            {
+                if(ver_numero.indexOf(icqv.charAt(i)) == -1)
+                    {
+                        invalido = false;
+                        break;
+                    }
+                
+                
+            }
+        if(!invalido)
+                    {
+                        alert("O campo ICQ deve conter apenas números!");
+                        icqlist.icq.focus()
+                        return(false);
+                    }
+        
+        if(icqlist.icq.value.length < 7 )
+            {
+                alert("O campo ICQ deve ter pelo menos 7 números!");
+                icqlist.icq.focus();
+                return(false);
+            }
+        if(icqlist.icq.value.length > 10)
+            {
+                alert("O campo ICQ deve ter menos de 10 números")
+                icqlist.icq.focus();
+                return(false);
+            }
+        
+        if(icqlist.senha.value != icqlist.senha2.value)
+            {
+                alert("As duas senhas devem ser iguais! ");
+                icqlist.senha2.focus;
+                return(false);
+            }
+        
+        if(icqlist.sexo.value == "selecione")
+            {
+                alert("Selecione um sexo!");
+                
+            }
+        
+        
+    }
+    
+    
+</script>    
+    
+    
+</body>
+</html>

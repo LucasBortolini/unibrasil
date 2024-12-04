@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Aulas Javascript</title>
+        <meta charset="utf-8">      
+          
+    </head>
+    <!--
+    Problema: Validar um formulário de login (usuário e senha) ao clicar no botão de envio.
+    Se houver algum campo vazio, deve ser mostrado um alert e impedir o envio.
+-->
+    
+    <body>
+        <div class="container">
+            <h1>Javascript</h1>
+            
+            
+            <!--1. Vamos criar um formulário
+            com 2 inputs com label, e um botão comum
+-->
+            <form action="#"><!-- a acao é ir pra ele mesmo-->
+                <label for="txtUser">Usuario</label>
+                <input type="text" id="txtUser" name="user"><br>
+                <label for="txtPass">Senha</label>
+                <input type="password" id="txtPass" name="pass">
+                <br>
+                <button type="button" id="btn">Logar</button>   
+            </form>
+            
+        </div>
+        
+        <script>
+            //Agora, quando clicar no botão, se algum elemento estiver vazio,
+            //não deixar enviar o formulário
+            
+            //2. Cria uma função autoinvicável para não poluir o escopo global
+            (function(){
+                'use strict'; //força o código a ser mais rigoroso, fazendo mais
+                //verificações, melhora a qualidade do código (Pesquise sobre!)
+                
+                //3. Faz a referência aos 3 elementos html criando uma variável
+                var $txtUser = document.getElementById('txtUser');
+                var $txtPass = document.getElementById('txtPass');
+                var $btn = document.getElementById('btn');
+                
+                //4. Atrela o evento ao botão
+                //addEventListener - botão, presta atenção quando tiver uma ação sobre você.
+                //Mas prestar em quê? Ah, quando tiver um evento de click.
+                //Blz, e faço o quê?
+                //Faz essa função aí
+                $btn.addEventListener('click', function(){
+                    
+                    //alert("Clicou no botão, evento funcionando OK")
+                    
+                    //5.Para sber o que tem dentro do campo, usamos a propriedade value.
+                    //Verificando os dois:
+                    //poderia ser if($txtUser.value === "" || $txtPass === ""),
+                    //string vazia é considerada false, ou melhor fazer com negação:
+                    
+                    if(!$txtUser.value || !$txtPass.value ){
+                        alert('Preencha todos os campos');
+                    }
+                });            
+                
+                
+                
+                
+            })()
+            
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+    <title>Aulas Javascript</title>
+        <meta charset="utf-8">
+
+    <body>
+<!--Vamos guardar os cliques e os atributos Nome e Idade no LocalStorage-->
+        
+        <!-- No evento onclick, chama a função -->
+        <p><button onclick="clickCounter()" type="button">Click me!</button></p>
+        <div id="result"></div>
+        <p>Click the button to see the counter increase.</p>
+        <p>Close the browser tab (or window), and try again, and the counter will continue to count (is not reset).</p>
+
+
+
+        <p>
+        <label>Nome:</label>
+        <input type="text" id="txtNome" />
+        <br/>
+        </p>
+
+        <p>
+        <label>Idade:</label>
+        <input type="text" id="txtIdade" />
+        <br/>
+        </p>
+        <button onclick="atualizaVisitante()">Salve</button>
+
+
+        <button onclick="apagarStorage()">Apagar Storage</button>
+        <div id="visitante"></div>
+
+    <script>
+        function clickCounter() {
+            
+            //Clickcounter vai adicionar um valor no atributo criado no localStorage, o clickcounter. O valor será o incremento de toda vez que for clicado.
+            
+            //verificação se tem storage suportado pelo nagevador
+          if(typeof(Storage) !== "undefined") {
+            if (localStorage.clickcount != null) {//verifica se tem valor no clickcount, poderia usar o getitem
+                
+              localStorage.clickcount = Number(localStorage.clickcount)+1; //clickcount - se não houver criado, ele cria, converte para número com Number e incrementa o clickcount com + 1
+            } else {//se não tiver nenhum clique ainda,
+              localStorage.clickcount = 1;//ele cria atribui 1 para o clickcount
+            }
+              //pegamos o valor armazenado no clickcount do storage e já mostramos no documento, na div result, com inner
+            document.getElementById("result").innerHTML = "You have clicked the button " + localStorage.clickcount + " time(s)."; //atualiza o texto da div com o count
+          }
+            else { //este senão é do primeiro if, se não tiver suporte
+            document.getElementById("result").innerHTML = "Sorry, your browser does not support local storage..."; //mostra que não tem suporte
+          }
+        }
+
+        //Função que atualiza o visitante recebido via input
+        //esta função é chamada no botão Salve
+        function atualizaVisitante() {
+          if(typeof(Storage) !== "undefined") { //verifica se tem suporte para storage
+                //pegamos a referência, o valor que há nos inputs e jogamos nas variaveis criadas nos localstorage 
+                localStorage.nome = document.getElementById("txtNome").value; //atualiza com o nome informado
+                localStorage.idade = document.getElementById("txtIdade").value; //atualiza com a idade informada
+
+            refreshTela();//Esta é a função que mostra o valor que está nos nomes, chama a função refreshTela para atualizar a tela
+          }
+        }
+        
+        //Botão aciona a função apagar, que dispensa explicações!
+        
+        function apagarStorage(){//remove os valores dos storages
+            localStorage.removeItem("nome");
+            localStorage.removeItem("clickcount");
+            localStorage.removeItem("idade");
+            refreshTela();
+        }//possível tbm usar o localStorage.clear()
+        
+        
+        //Assim que a tela é carregada, a função autoexecutável chama refreshTela
+        window.onload = function(){
+                refreshTela();//chama a função refreshTela para atualizar a tela
+            }
+        
+        //Função Atualiza
+        //apaga a linha que continha a mensagem anterior, preenchendo com ""
+        //verifica o suporte para localstorage
+        //se tiver, verifica se o nome e a idade são diferentes de indefinido, ou seja, se tem algo,
+        //e mostra na tela o que tem nestes valores pelo inner
+        function refreshTela(){
+                document.getElementById("visitante").innerHTML = ""//apaga a msg anterior
+                if(typeof(Storage) !== "undefined") {//verifica se tem storage suportado pelo nagevador
+                    
+                    if (localStorage.nome != undefined  && localStorage.nome != "")//verifica se tem valor salvo
+                        document.getElementById("visitante").innerHTML = "Último visitante: " + localStorage.nome;//mostra o nome salvo na div visitante
+                    if (localStorage.idade != undefined && localStorage.idade != "")//verifica se tem valor salvo
+                        document.getElementById("visitante").innerHTML = document.getElementById("visitante").innerHTML + " de " +localStorage.idade + " anos";	
+                        //mostra a idade salvo na div visitante				
+                }
+        }
+    </script>        
+        
+    </body>
+</html>
+
+<!--
+A API chamada Web Storage provê dois mecanismos básicos para se guardar informações no browser do usuário: sessionStorage e localStorage.
+sessionStorage mantém o dado gravado apenas até o término da sessão do usuário, ou seja, até o browser do usuário se fechar incluindo reloads da página ou restores.
+localStorage: mantém o dado gravado mesmo se o browser é fechado e reaberto.
+Isso facilita criar alguns comportamentos de interface durante o uso do usuário.
+Ajuda a salvar preferências.
+NOTA: Não serve para gravar dados sensíveis.
+
+Ele é mais seguro e confiável que os Cookies, além de não serem enviados em todas as requisições para o servidor, em consequência, em aplicações de grande porte isto economizará muitos dados trafegados.
+
+localStorage.setItem(name, value);
+localStorage.getItem(name);
+localStorage.clear();
+
+localStorage.length;
+
+
+-->

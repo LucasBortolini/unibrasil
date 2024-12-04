@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Aulas Javascript </title>
+        <meta charset="utf-8">      
+          
+    </head>
+    
+    <body>
+        <div class="container">
+            <h1>Javascript</h1>
+            
+            <!--1. Cria 2 botões para testar DOM 0 escrito das duas maneiras. O botão 1
+                será chamado a função pelo evento direto direto no html, o 2 será no script.
+            O nome do evento é click, mas utilizando dom 0 utiliza sempre o "on" na frente,
+            tanto no html quando no js    -->
+            <button id="btn1" onclick="clicar()">botao 1</button>
+            <button id="btn2">botao 2</button>
+            
+            <!--5. DOM 2 - Cria outro botão e atrela ele lá no js-->
+            <button id="btn3" onclick="alert('mundo 2');">botao 3</button>
+        </div>
+        
+        
+        <script>
+            //2. Atrela o botão 2 ao javascript, segunda maneira de utilizar o DOM 0
+            var btn2 = document.getElementById('btn2');
+            
+            var btn3 = document.getElementById('btn3');
+            
+            //3. Chama a função clicar para o botão 2
+            btn2.onclick = clicar; //teste colocando com o parênteses, o js vai executar
+            //primeiro e tentar jogar o resultado para o botão, que vai dar undefined.
+            
+            
+            //4. escreve a função clicar
+            function clicar(){
+                alert('clicou');
+            //4.1 Pode usar com parenteses na chamada apenas se usar outra função como
+            //retorno    
+                return function(){
+                    alert('clicou 2');
+                }
+            }
+            
+            //6. Atrela este botão utilizando o evento
+            //DOM 2 tiramos o "on"
+            //
+            btn3.addEventListener("click", function(){
+                alert('clicou botao 3 com dom level 2 com addEventListener');
+            });
+            //7. Atrela outro evento ao mesmo elemento, ele executa novamente. Se em uma parte do código ecisa de um evento e em outro precisa de mais um, é possível.
+            btn3.addEventListener("click", function(){
+                alert('clicou botao 3 com dom level 2 com outro evento no addEventListener');
+            });
+            
+            //8.Testando colocar mais de um evento com DOM 0, chama mais 2 funções
+            //anonimas com alerts, e mais um evento no onclick no html. Sermpre será
+            //sobrescrito, vai aparecer apenas o último evento.
+            btn3.onclick= function (){
+                alert('ola');
+            }
+            btn3.onclick=function(){ //último evento escrito com DOM 0; significa
+                //que ele vai executar este último apenas, porque sobrescreve
+                alert('mundo 3');
+            }
+              
+            
+            
+            //12. Função para entender o Object Event, o cara que vai como parâmetro
+            //dentro da funcao anonima
+            document.addEventListener('click', function(e){//dentro desta função colocamos
+                //o nome de uma variável. Quando passamos este objeto, a função vira
+                //o objeto passado
+                
+                console.log('clicou no document');
+                console.log(e.currentTarget);//Se eu quiser saber o elemento que recebeu o click, ou quem disparou o evento??
+                //current.Target é o elemento ao qual foi atrelado o evento, no caso o próprio document
+                
+                console.log(this);//sempre o dono do evento, quase igual ao current.Target, elemento ao qual foi atrelado o evento
+                console.log(e.target); //quem disparou o evento
+                //Por padrão se usa o "e" ou "evt"
+                //em suma se utiliza para saber mais informações sobre o evento, aí você passa ele como parâmetro na função
+                //e.stopPropagation impede a propagação. Teste com e sem o stopPropagation
+                
+            }, false);
+            
+            
+            
+            
+        </script>
+        
+    </body>
+</html>
+
+<!--
+Eventos
+Um evento é uma ação executada por algo ou alguém:
+um clique em um link ou botão, envio de formulário, etc (por usuário).
+O browser tbm dispara eventos, carregar e fechar pagina, carregar imagem, etc...
+Um disparador de evento é o elemento html que originou o evento, como o botão que foi clicado.
+
+Eventos padrão (não precisamos fazer nada, o browser sabe o que fazer): abrir uma página, submeter um form.
+
+Event handler é a função a ser executada quando ocorre o evento, são manipuladores de evento. Ex: click, mouseover, mouseout, keyup(soltar tecla), submit, load...
+
+DOM level 0, maneira antiga de atrelar evento quando não havia padrão:
+html: <p onclick="função()">
+js: p.onclick=funcao //pra deixar eventos todos controlados nos arquivos js, sem () pq senão ele iria executar a função sem espear o click
+
+DOM level 2:
+p.addEventListener("click", funcao);
+
+DOM 2 permite atrelar mais de um evento ao mesmo elemento html
+
+--------------
+
+Propagação:
+Capacidade dos eventos de percorrerem a estrutura do html, desde o elemento original
+ao nível mais alto (numa página web, é o body)
+
+----------
+
+Objeto Event (e, evt, event)
+
+Objeto passado por parâmetro para a função que foi atrelada nos fornecendo várias
+informações adicionais sobre o evento em si. Este objeto varia de acordo com o
+tipo do evento.
+Usamos quando precisamos saber mais informações sobre o evento em si
+
+-----
+
+
+-->
+

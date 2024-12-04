@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Aulas Javascript</title>
+        <meta charset="utf-8">      
+          
+    </head>
+    <!-- Exemplo de calculadora em tempo real, apenas alterando os valores dos inputs e clicando fora, evento onblur-->
+    <body>
+        <form action="" method="post">
+          Digite um número: <input type="text" id="n1" value="10" /> <br> Digite mais um número: <input type="text" id="n2" value="5" onblur="calcular()" /> <!-- responsável: evento onblur--> <br>
+        </form>
+
+        <div id="resultado"></div>
+       
+    <script>
+    
+        function calcular() {
+            //colocando as referências e convertendo
+            var n1 = parseInt(document.getElementById('n1').value, 10);
+          var n2 = parseInt(document.getElementById('n2').value, 10);
+         //jogando os resultados no documento apenas clicando fora do campo
+            document.getElementById('resultado').innerHTML = n1 + n2;
+        }
+    </script>    
+    </body>
+</html>

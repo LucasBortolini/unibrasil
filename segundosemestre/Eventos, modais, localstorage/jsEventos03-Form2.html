@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Aulas Javascript</title>
+        <meta charset="utf-8">      
+          
+    </head>
+    <!--Problema: Resolver o mesmo exercício anterior, mas agora não mais validando
+        no click do botão, e sim no submit do formulário
+
+Precisamos atrelar o evento no input do formulário, e não no click do botão
+
+-->
+    
+    <body>
+        <div class="container">
+            <h1>Javascript</h1>
+            
+            <form action="#" method="POST"> <!--1. Colocamos método POST, pq estamos tratando de dados sensíveis-->
+                <label for="txtUser">Usuario</label>
+                <input type="text" id="txtUser" name="user"><br>
+                <label for="txtPass">Senha</label>
+                <input type="password" id="txtPass" name="pass">
+                <br>
+                <!--2. Alteramos o botão comum e trocamos pelo correto, submit, pois ele envia realmente o formulário (teste sem o método POST e veja na url!)-->
+                <button type="submit" id="btn">Logar</button>   
+            </form>
+            
+        </div>
+        
+        <script>
+            
+            (function(){
+                'use strict';
+                //3. Criamos uma variável para referenciar o form, onde iremos atrelar o evento de validação
+                var $form = document.querySelector('form');
+                var $txtUser = document.getElementById('txtUser');
+                var $txtPass = document.getElementById('txtPass');
+                var $btn = document.getElementById('btn');
+                
+                $form.addEventListener('submit', function(e){  //4. Alteramos aqui para o submit, atrelamos o evento ao envio. 
+                    if(!$txtUser.value || !$txtPass.value ){
+                        alert('Preencha todos os campos');
+                        //5. O form é enviado da mesma forma, então podemos utilizar este evento para impedir que o formulário seja enviado. Poderia ser o stopPropagation, ou ainda este outro:
+                        e.preventDefault(); //Não esquecer de passar ele como parâmetro na função. Este evento evita o evento padrão.
+                        //Qual o evento padrão no submit? enviar os dados. Então evitamos que ele aconteça.
+                        //Qual o evento padrão quando clica em um link? Carregar a página.
+                    }
+                });            
+                
+                
+                
+                
+            })()
+            
+        </script>
+        
+    </body>
+</html>

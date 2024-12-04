@@ -1,0 +1,21 @@
+<html>
+    <head>
+    <script>
+        function abre_janela(url){ //função para abrir uma janela com o parâmetro url que é o html, com os tamanhos devidos
+            window.open(url,"","width=250,height=350,scrollbars=no");
+            //as aspas vazias é opcional, pode colocar o nome da janela,
+            /*
+            _blank - URL is loaded into a new window, or tab. This is default
+_parent - URL is loaded into the parent frame
+_self - URL replaces the current page
+_top - URL replaces any framesets that may be loaded
+name - The name of the window (Note: the name does not specify the title of the new window)*/
+
+        }
+    </script>
+</head>
+<body>
+<a href="javascript:abre_janela('jsJanelaFilha.html')">Exemplo de Abertura de Janela Filha</a>
+
+</body>
+</html>

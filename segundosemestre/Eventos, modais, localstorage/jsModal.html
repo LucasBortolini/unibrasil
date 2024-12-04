@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Aulas Javascript</title>
+        <meta charset="utf-8">      
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif;}
+
+            /* A Modal (fundo) */
+            .modal {
+              display: none; /* Escondido por default */
+              position: fixed; /* Fixa */
+              z-index: 1; /* Situado no topo */
+              padding-top: 100px; /* Localização da caixa */
+              left: 0;
+              top: 0;
+              width: 100%; /* Largura cheia */
+              height: 100%; /* Altura cheia */
+              overflow: auto; /* Desabilita scroll se necessário */
+              background-color: rgb(0,0,0);
+              background-color: rgba(0,0,0,0.4); /* Preto c/ opacidade */
+            }
+
+            /* Conteúdo da Modal */
+            .modal-content {
+              background-color: #fefefe;
+              margin: auto;
+              padding: 20px;
+              border: 1px solid #888;
+              width: 80%;
+            }
+
+            /* "Botão" Fechar */
+            .close {
+              color: #aaaaaa;
+              float: right;
+              font-size: 28px;
+              font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+              color: #000;
+              text-decoration: none;
+              cursor: pointer;
+            }
+        </style>
+    </head>
+<body>
+
+<h2>Exemplo de Modal Javascript</h2>
+
+<!-- Abre a Modal -->
+<button id="myBtn">Abre Modal</button>
+
+<!-- A Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Conteúdo da Modal -->
+  <div class="modal-content">
+    <span class="close">&times;</span> <!-- Este caracter é o X, para não
+      aparecer como um botão-->
+    <p>Qualquer coisa dentro de sua Modal...</p>
+  </div>
+
+</div>
+
+    <script>
+        // Pega a referência da modal
+        var modal = document.getElementById("myModal");
+
+        // Pega a referência do botão que abre a modal
+        var btn = document.getElementById("myBtn");
+
+        // Pega a referência do <span> que fecha a modal
+        var span = document.getElementsByClassName("close")[0]; //é o primeiro close,
+        //para garantir, [0]
+        //Você pode mudar para um botão por exemplo
+        
+        // Quando o usuário clica no botão, abre a modal 
+        btn.onclick = function() {
+          modal.style.display = "block"; //estava como none, agora na abertura,
+          //mudamos para block
+        }
+
+        // Quando o usuário clica no <span> (x), fecha a modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        // Quando o usuário clica em qualquer lugar fora da modal, ela fecha
+        window.onclick = function(event) {
+            //event, referência ao próprio evento 
+            //quando a modal está abertal, tudo fical modal, exceto o conteúdo dela,
+            //que é o modal-content
+            //fizemos isto no css, 100% do tamanho
+            //ou seja, se clicamos em qualquer lugar fora do conteúdo, o target
+            //(o lugar que foi clicado e disparou o evento) é a == modal, então fechamos ela
+            //debugue com o F12 colocando breakpoint no if a seguir
+          if (event.target == modal) {//target é quem disparou, onde foi clicado
+            modal.style.display = "none";
+          }
+        }
+    </script>
+    
+    </body>
+</html>
